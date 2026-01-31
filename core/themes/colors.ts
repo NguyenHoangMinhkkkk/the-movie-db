@@ -26,7 +26,7 @@ export default (() => {
     x7: (alpha: number = 1) => createAlphaColor(63, 63, 70)(alpha), // rgba(63, 63, 70, 1)
     x6: (alpha: number = 1) => createAlphaColor(82, 82, 91)(alpha), // rgba(82, 82, 91, 1)
     x5: (alpha: number = 1) => createAlphaColor(113, 113, 122)(alpha), // rgba(113, 113, 122, 1)
-    x4: (alpha: number = 1) => createAlphaColor(161, 161, 170)(alpha), // rgb(46, 46, 203)
+    x4: (alpha: number = 1) => createAlphaColor(161, 161, 170)(alpha), // rgb(161, 161, 170)
     x3: (alpha: number = 1) => createAlphaColor(212, 212, 216)(alpha), // rgba(212, 212, 216, 1)
     x2: (alpha: number = 1) => createAlphaColor(228, 228, 231)(alpha), // rgba(228, 228, 231, 1)
     x1: (alpha: number = 1) => createAlphaColor(244, 244, 245)(alpha), // rgba(244, 244, 245, 1)

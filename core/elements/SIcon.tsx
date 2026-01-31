@@ -9,6 +9,8 @@ import {
   WarningIcon,
   XCircleIcon,
   ImageIcon,
+  HouseIcon,
+  BookmarkIcon,
 } from 'phosphor-react-native';
 import { ColorValue, StyleProp, ViewStyle } from 'react-native';
 
@@ -38,6 +40,8 @@ type IconConfigType =
   | 'CheckIcon'
   | 'WarningIcon'
   | 'XCircleIcon'
+  | 'HouseIcon'
+  | 'BookmarkIcon'
   | 'ImageIcon';
 
 const IconConfig: Record<IconConfigType, React.FC<IconProps>> = {
@@ -45,6 +49,8 @@ const IconConfig: Record<IconConfigType, React.FC<IconProps>> = {
   CheckIcon,
   WarningIcon,
   XCircleIcon,
+  HouseIcon,
+  BookmarkIcon,
   ImageIcon,
 };
 

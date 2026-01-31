@@ -5,7 +5,7 @@ import { IconElementProps, SIcon } from '@elements';
 
 type Props = ImageProps & {
   placeholderIcon?: IconElementProps['name'];
-  placeholderIconColor?: string | ColorValue;
+  placeholderIconColor?: ColorValue;
 };
 
 function SImage(props: Props) {

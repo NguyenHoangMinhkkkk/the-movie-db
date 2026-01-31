@@ -93,7 +93,7 @@ const CustomToast = (toastType: ToastType, data: DataToast) => {
   );
 };
 
-function BottomToast(_: any, ref: any) {
+function BottomToast() {
   const insets = useSafeAreaInsets();
   const safeAreaFrame = useSafeAreaFrame();
   const dimensions = useWindowDimensions();
@@ -101,17 +101,17 @@ function BottomToast(_: any, ref: any) {
   const bugFixDelta =
     Math.abs(safeAreaFrame.height - dimensions.height) > 1 ? insets.bottom : 0;
 
+  // workaround => looking for issue from backpackapp-io/react-native-toast
   const toastInsetsReset = {
     top:
-      -insets.top - 16 + Platform.select({ ios: 0, default: 32 }) + bugFixDelta,
-    bottom: -insets.bottom - 16,
+      -insets.top -
+      metrics.spacing.x4 +
+      Platform.select({ ios: 0, default: metrics.spacing.x8 }) +
+      bugFixDelta,
+    bottom: -insets.bottom - metrics.spacing.x4,
   };
 
   const currentId = React.useRef('');
-
-  React.useImperativeHandle(ref, () => ({
-    shown: shown,
-  }));
 
   const shown = async (data: {
     message: string;
@@ -182,4 +182,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default React.forwardRef(BottomToast);
+export default BottomToast;

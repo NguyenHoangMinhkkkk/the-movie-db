@@ -1,13 +1,23 @@
-import { SText } from '@elements';
+import { BottomToast } from '@components';
+import { colors } from '@themes';
 import React from 'react';
-import { StyleSheet, View } from 'react-native';
+import { StatusBar } from 'react-native';
+import { GestureHandlerRootView } from 'react-native-gesture-handler';
+import { SafeAreaProvider } from 'react-native-safe-area-context';
+import Navigation from './navigation';
 
-export default function Root() {
-  return <View style={styles.container} />;
+export default function App() {
+  return (
+    <SafeAreaProvider>
+      <StatusBar
+        barStyle="dark-content"
+        translucent
+        backgroundColor={colors.transparent}
+      />
+      <GestureHandlerRootView>
+        <Navigation />
+        <BottomToast />
+      </GestureHandlerRootView>
+    </SafeAreaProvider>
+  );
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-  },
-});

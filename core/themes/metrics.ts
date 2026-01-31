@@ -48,7 +48,7 @@ export default (() => {
     isAndroid,
     isIphoneX,
     androidApiLevel,
-    bottomTabHeight: 40 + iPhoneBottomSpace + sysSize.x4,
+    bottomTabHeight: 32 + iPhoneBottomSpace + sysSize.x4,
     isLargeIphone,
     isPortrait,
     screenWidth,
