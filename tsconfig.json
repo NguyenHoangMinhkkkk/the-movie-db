@@ -3,7 +3,19 @@
   "compilerOptions": {
     "baseUrl": ".",
     "paths": {
-      "@core/*": ["core/*"]
+      "@core/*": ["core/*"],
+      "@components": ["./src/components"],
+      "@hooks": ["./src/hooks"],
+      "@assets": ["./src/assets"],
+      "@themes": ["./src/themes"],
+      "@elements": ["./src/elements"],
+      "@utils": ["./src/utils"],
+      "@actions": ["./src/actions"],
+      "@contexts": ["./src/contexts"],
+      "@navigation/*": ["./src/navigation/*"],
+      "@constants": ["./src/constants"],
+      "@api": ["./src/api"],
+      "@types": ["./src/types"]
     }
   },
   "include": ["src", "@types"],
