@@ -1,7 +1,7 @@
-export type DataResponse<T, X = any> = {
+export type ApiDataResponse<T, E> = {
   ok: boolean;
   data: T;
-  errorData?: X;
+  errorData?: E;
   message?: string;
   status?: number | string;
   statusCode?: number | string;

@@ -11,5 +11,6 @@ export const STextInput = createTextInputElement(
   colors.gray.x5(),
 );
 
-export { default as SIcon } from './SIcon';
+export { default as SIcon, type IconElementProps } from './SIcon';
+
 export { default as Spacing } from './Spacing';

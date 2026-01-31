@@ -3,10 +3,10 @@ import { Alert, ColorValue, Text, TextProps } from 'react-native';
 import {
   fontFamilies,
   fontSizes,
-  FontVariant,
-  LineHeightVariant,
-  FontSize,
   lineHeights,
+  type FontVariant,
+  type LineHeightVariant,
+  type FontSize,
 } from '../themes';
 
 export type STextProps = {

@@ -1,10 +1,8 @@
+import { SText } from '@elements';
 import React from 'react';
 import { StyleSheet, View } from 'react-native';
 
-export type RouteType = {};
-type Props = {};
-
-export default function RootApp(_: Props) {
+export default function Root() {
   return <View style={styles.container} />;
 }
 

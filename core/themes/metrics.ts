@@ -24,6 +24,7 @@ export default (() => {
     statusBarHeight,
     isIphoneX,
     isLargeIphone,
+    androidApiLevel,
   } = deviceMetrics;
 
   const isSmallScreen = screenWidth <= 360;
@@ -46,6 +47,7 @@ export default (() => {
     isIOS,
     isAndroid,
     isIphoneX,
+    androidApiLevel,
     bottomTabHeight: 40 + iPhoneBottomSpace + sysSize.x4,
     isLargeIphone,
     isPortrait,

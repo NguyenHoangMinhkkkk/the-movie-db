@@ -8,6 +8,7 @@ import {
   CheckIcon,
   WarningIcon,
   XCircleIcon,
+  ImageIcon,
 } from 'phosphor-react-native';
 import { ColorValue, StyleProp, ViewStyle } from 'react-native';
 
@@ -32,13 +33,19 @@ export type IconElementProps = IconProps & {
   weight?: IconProps['weight'];
 };
 
-type IconConfigType = 'XIcon' | 'CheckIcon' | 'WarningIcon' | 'XCircleIcon';
+type IconConfigType =
+  | 'XIcon'
+  | 'CheckIcon'
+  | 'WarningIcon'
+  | 'XCircleIcon'
+  | 'ImageIcon';
 
 const IconConfig: Record<IconConfigType, React.FC<IconProps>> = {
   XIcon,
   CheckIcon,
   WarningIcon,
   XCircleIcon,
+  ImageIcon,
 };
 
 function createSIcon() {

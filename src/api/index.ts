@@ -1,4 +1,4 @@
-import { DataResponse } from '@types';
+import { ApiDataResponse } from '@types';
 import { baseApi, BaseApi } from './baseApi';
 import routes from './routes';
 
@@ -13,7 +13,7 @@ const requestApi = {
   baseApi: baseApi,
   routesUploadProfileAvatar: routes.uploadAvatar,
 
-  someRequest: (body: any): Promise<DataResponse<{}, {}>> => {
+  someRequest: (body: any): Promise<ApiDataResponse<{}, {}>> => {
     return baseApi.api.patch(routes.languages, body);
   },
 };
