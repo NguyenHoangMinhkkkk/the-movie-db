@@ -9,9 +9,9 @@ export default function HomeTab({ navigation }: Props) {
   return (
     <View style={styles.container}>
       <SText.Regular
-        onPress={() =>
-          navigation.navigate('detailMovieScreen', { movieId: 'asdfasdfs' })
-        }
+        onPress={() => {
+          navigation.navigate('detailMovieScreen', { movieId: 'dummy' });
+        }}
       >
         {'Home Tab'}
       </SText.Regular>

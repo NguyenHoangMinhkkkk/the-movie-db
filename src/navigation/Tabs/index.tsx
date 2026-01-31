@@ -33,7 +33,7 @@ export const TabInitialParams: TInitialParams<
       <SIcon.Icon
         name="HouseIcon"
         weight="fill"
-        color={colors.whiteA(0.7)}
+        color={colors.whiteA(0.4)}
         size={metrics.iconSize.x6}
       />
     ),
@@ -41,7 +41,7 @@ export const TabInitialParams: TInitialParams<
       <SIcon.Icon
         name="HouseIcon"
         weight="fill"
-        color={colors.blue.x5()}
+        color={colors.white}
         size={metrics.iconSize.x6}
       />
     ),
@@ -52,7 +52,7 @@ export const TabInitialParams: TInitialParams<
       <SIcon.Icon
         name="BookmarkIcon"
         weight="fill"
-        color={colors.whiteA(0.7)}
+        color={colors.whiteA(0.4)}
         size={metrics.iconSize.x6}
       />
     ),
@@ -60,7 +60,7 @@ export const TabInitialParams: TInitialParams<
       <SIcon.Icon
         name="BookmarkIcon"
         weight="fill"
-        color={colors.blue.x5()}
+        color={colors.white}
         size={metrics.iconSize.x6}
       />
     ),
