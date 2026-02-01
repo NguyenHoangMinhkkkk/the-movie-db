@@ -10,6 +10,8 @@ import React from 'react';
 import { ScrollView, StyleSheet, View } from 'react-native';
 import MovieFacts from './MovieFacts';
 import MovieOverview from './MovieOverview';
+import MovieCasts from './MovieCasts';
+import { Spacing } from '@elements';
 export type RouteType = {
   movie: TMovie;
 };
@@ -112,10 +114,15 @@ export default function DetailMovieScreen({ navigation, route }: Props) {
     <View style={[styles.container, { backgroundColor: ScreenThemeColor }]}>
       <ScrollView style={basicStyles.flex}>
         <MovieFacts movie={movieState.movie} />
+
         <MovieOverview
           movie={movieState.movie}
           crews={movieState.credit.crew}
         />
+
+        <MovieCasts casts={movieState.credit.cast} />
+
+        <Spacing space={metrics.spacing.x8} />
       </ScrollView>
     </View>
   );
