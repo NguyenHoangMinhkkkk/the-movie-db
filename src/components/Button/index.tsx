@@ -20,7 +20,7 @@ type Props = {
   text: string;
 };
 
-export default function ClassName(props: Props) {
+export default function Button(props: Props) {
   const {
     isLoading = false,
     variant = 'radius-nomal',

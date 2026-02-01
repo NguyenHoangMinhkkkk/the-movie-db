@@ -89,7 +89,7 @@ export default function TabNavigator() {
       <TabStack.Screen
         name="watchListTab"
         component={WatchListTab}
-        options={{}}
+        options={{ headerShown: false }}
         initialParams={TabInitialParams.watchListTab}
       />
     </TabStack.Navigator>

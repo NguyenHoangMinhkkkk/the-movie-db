@@ -8,7 +8,30 @@ export type ApiDataResponse<T, E = any> = {
   code?: number | string;
 };
 
-export type TDiscoverMovie = {
+export type TAccount = {
+  avatar: {
+    gravatar: {
+      hash: string;
+    };
+    tmdb: {
+      avatar_path: string;
+    };
+  };
+  id: number;
+  iso_639_1: string;
+  iso_3166_1: string;
+  name: string;
+  include_adult: false;
+  username: string;
+};
+
+export type TLanguage = {
+  iso_639_1: string;
+  english_name: string;
+  name: string;
+};
+
+export type TDiscoverMovieResponse = {
   dates: {
     maximum: string;
     minimum: string;
@@ -23,6 +46,7 @@ export type TMovie = {
   adult: boolean;
   backdrop_path: string | null;
   genre_ids: number[];
+  genres?: { id: number; name: string }[];
   id: number;
   original_language: string;
   original_title: string;
@@ -34,6 +58,51 @@ export type TMovie = {
   video: boolean;
   vote_average: number;
   vote_count: number;
+  cert?: string | null;
+  runtime?: number | null;
+  status?: string;
+  tagline?: string;
+};
+
+export type TCreditResponse = {
+  id: number;
+  cast: TCreditCastPerson[];
+  crew: TCreditCrewPerson[];
+};
+
+export type TCreditCastPerson = {};
+
+export type TCreditCrewPerson = {
+  id: number;
+  name: string;
+  original_name: string;
+  job: string; // Director | Writer | ...
+  department: string; // Directing | Writing
+  known_for_department: string;
+  profile_path: string | null;
+  popularity: number;
+  credit_id: string;
+  gender: number;
+  adult: boolean;
+};
+
+export type TReleaseDatesResponse = {
+  id: number;
+  results: TReleaseDate[];
+};
+
+export type TReleaseDate = {
+  iso_3166_1: string;
+  release_dates: ReleaseDateItem[];
+};
+
+export type ReleaseDateItem = {
+  certification: string;
+  descriptors: string[];
+  iso_639_1: string;
+  note: string;
+  release_date: string;
+  type: number;
 };
 
 export type MovieQueryObject = {

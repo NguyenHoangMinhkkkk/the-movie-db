@@ -1,12 +1,24 @@
 import { requestApi } from '@api';
-import { ENV } from '@constants';
+import { DEFAULT } from '@constants';
+import { TAccount } from '@types';
 
 import { delay } from '@utils';
 
 export default async function initialize() {
-  requestApi.baseApi.setBaseEnv(ENV.baseUrl, `Bearer ${ENV.accessToken}`);
+  requestApi.baseApi.setBaseEnv(
+    DEFAULT.baseUrl,
+    `Bearer ${DEFAULT.accessToken}`,
+  );
 
-  await delay(500);
+  const languageConfig = await requestApi.requestGetConfigurationLanguages();
+  const accountInfo = await requestApi.requestAccountInfo(DEFAULT.accountId);
 
-  return true;
+  // TODO handle exception {return error}
+
+  await delay(100);
+
+  return {
+    languageConfig: languageConfig.ok ? languageConfig.data : [],
+    accountInfo: accountInfo.ok ? accountInfo.data : ({} as TAccount),
+  };
 }

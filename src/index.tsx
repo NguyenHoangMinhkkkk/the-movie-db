@@ -1,33 +1,33 @@
-import { colors } from '@themes';
-import React from 'react';
-import { uiTouchEvent } from '@hooks';
-import { StatusBar } from 'react-native';
-import { GestureHandlerRootView } from 'react-native-gesture-handler';
-import { SafeAreaProvider } from 'react-native-safe-area-context';
-import Navigation from './navigation';
-import initialize from './initialize';
-import { AppLoading } from '@components';
 import { ContextContainer } from '@contexts';
 
-export default function App() {
-  const [isReady, setIsReady] = React.useState(false);
+import React from 'react';
+import App from './App';
+import { CatchException } from '@components';
 
-  React.useEffect(() => {
-    initialize().then(() => setIsReady(true));
-  }, []);
+class Index extends React.Component<any> {
+  static getDerivedStateFromError() {
+    return { hasError: true };
+  }
 
-  return (
-    <SafeAreaProvider>
-      <StatusBar
-        barStyle="dark-content"
-        translucent
-        backgroundColor={colors.transparent}
-      />
-      <GestureHandlerRootView>
-        <ContextContainer>
-          {isReady ? <Navigation /> : <AppLoading />}
-        </ContextContainer>
-      </GestureHandlerRootView>
-    </SafeAreaProvider>
-  );
+  state = { hasError: false };
+
+  componentDidCatch(error: any, errorInfo: any) {
+    if (__DEV__) {
+      console.log('componentDidCatch ', error, errorInfo);
+    }
+  }
+
+  render() {
+    if (this.state.hasError) {
+      return <CatchException onRetry={() => {}} />;
+    }
+
+    return (
+      <ContextContainer>
+        <App />
+      </ContextContainer>
+    );
+  }
 }
+
+export default Index;

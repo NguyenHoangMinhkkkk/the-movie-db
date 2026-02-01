@@ -1,12 +1,13 @@
 import { StorageKey } from '@constants';
 import { createContext } from '@hooks';
-import { TMovie, MovieSortEnum, CategoryEnum } from '@types';
+import { TMovie, MovieSortEnum, CategoryEnum, TLanguage } from '@types';
 import { AppStorage } from '@utils';
 
 export type MovieContextValueType = {
   sortKey: MovieSortEnum;
   categoryKey: CategoryEnum;
   watchList: TMovie[];
+  languageConfig: TLanguage[];
 };
 
 type ContextActionType = {
@@ -15,15 +16,17 @@ type ContextActionType = {
   setCategory: (nextCategory: CategoryEnum) => void;
   watchListAdd: (movieItem: TMovie) => void;
   watchListRemove: (movieId: number) => void;
+  setLanguageConfig: (languageConfig: TLanguage[]) => void;
 };
 type ContextCustomActions = {
-  isInWatchList: (movieId: number) => boolean;
+  itemExistInWatchList: (movieId: number) => boolean;
 };
 
 const DefaultContextValue: MovieContextValueType = {
   sortKey: MovieSortEnum['title.asc'],
   categoryKey: CategoryEnum.now_playing,
   watchList: [],
+  languageConfig: [],
 };
 
 const getStorageData = (): MovieContextValueType => {
@@ -33,6 +36,7 @@ const getStorageData = (): MovieContextValueType => {
     const watchList = AppStorage.getString(StorageKey.WATCH_LIST);
 
     return {
+      ...DefaultContextValue,
       sortKey: (sortBy as MovieSortEnum) || DefaultContextValue.sortKey,
       categoryKey:
         (categoryBy as CategoryEnum) || DefaultContextValue.categoryKey,
@@ -65,15 +69,20 @@ export default createContext<
     },
     watchListAdd: (state, movieItem) => {
       const nextWatchList = [...state.watchList, movieItem];
+      AppStorage.set(StorageKey.WATCH_LIST, JSON.stringify(nextWatchList));
       return { ...state, watchList: nextWatchList };
     },
     watchListRemove: (state, movieId) => {
       const nextWatchList = state.watchList.filter(item => item.id !== movieId);
+      AppStorage.set(StorageKey.WATCH_LIST, JSON.stringify(nextWatchList));
       return { ...state, watchList: nextWatchList };
+    },
+    setLanguageConfig: (state, languageConfig) => {
+      return { ...state, languageConfig: languageConfig };
     },
   }),
   (_, state) => ({
-    isInWatchList: movieId => {
+    itemExistInWatchList: movieId => {
       return state.watchList.some(item => item.id === movieId);
     },
   }),

@@ -1,7 +1,5 @@
-import { requestApi } from '@api';
-import { ENV } from '@constants';
-import { useMovieContext } from '@contexts';
-import { SImage, SText, STouchable } from '@elements';
+import { DEFAULT } from '@constants';
+import { SIcon, SImage, SText, STouchable } from '@elements';
 import { basicStyles, colors, metrics } from '@themes';
 import { TMovie } from '@types';
 import { buildImageUrl } from '@utils';
@@ -12,12 +10,19 @@ import { StyleSheet, View } from 'react-native';
 type Props = {
   movie: TMovie;
   onPress: () => void;
+  allowRemove?: boolean;
+  onRemove: () => void;
 };
 
-export default function MovieListItem({ movie, onPress }: Props) {
+export default function MovieListItem({
+  movie,
+  onPress,
+  onRemove,
+  allowRemove,
+}: Props) {
   const imageUrl = !movie.poster_path
     ? ''
-    : buildImageUrl(ENV.mediaUrl, 'w185', movie.poster_path ?? '');
+    : buildImageUrl(DEFAULT.mediaUrl, 'w185', movie.poster_path ?? '');
 
   return (
     <STouchable style={styles.container} onPress={() => onPress()}>
@@ -50,6 +55,14 @@ export default function MovieListItem({ movie, onPress }: Props) {
               </SText.Regular>
             ) : null}
           </View>
+          {allowRemove ? (
+            <STouchable
+              style={styles.removeButton}
+              onPress={() => onRemove?.()}
+            >
+              <SIcon.Icon name="XIcon" />
+            </STouchable>
+          ) : null}
         </View>
       </View>
     </STouchable>
@@ -75,5 +88,9 @@ const styles = StyleSheet.create({
   movieInfor: {
     flex: 1,
     padding: metrics.spacing.x4,
+  },
+  removeButton: {
+    padding: metrics.spacing.x2,
+    alignSelf: 'flex-start',
   },
 });

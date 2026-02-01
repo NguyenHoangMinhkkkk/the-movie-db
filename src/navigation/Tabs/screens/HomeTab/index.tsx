@@ -11,6 +11,7 @@ import { metrics } from '@themes';
 import { MovieList } from '@components';
 import SearchBox from './SearchBox';
 import { debounce, mergeArrayAndUniqueById } from '@utils';
+import { DEFAULT } from '@constants';
 
 type Props = ScreenPropsType<'homeTab'>;
 
@@ -61,7 +62,7 @@ export default function HomeTab({ navigation }: Props) {
       {
         page: String(page),
         sort_by: params.sortKey ?? sortKey,
-        language: 'en-US',
+        language: DEFAULT.language,
       },
     );
 

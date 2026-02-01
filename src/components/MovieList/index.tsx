@@ -15,15 +15,22 @@ type Props = {
   isRefreshing: boolean;
   isError: boolean;
   canLoadmore: boolean;
+  allowRemove?: boolean;
   onRefresh?: () => void;
   onLoadmore?: () => void;
   onPressItem?: (movie: TMovie) => void;
+  onRemove?: (movieId: number) => void;
 };
 
 export default function MovieList(props: Props) {
   const renderItem = ({ item }: { item: TMovie }) => {
     return (
-      <MovieListItem movie={item} onPress={() => props.onPressItem?.(item)} />
+      <MovieListItem
+        movie={item}
+        onPress={() => props.onPressItem?.(item)}
+        allowRemove={props.allowRemove}
+        onRemove={() => props.onRemove?.(item.id)}
+      />
     );
   };
 

@@ -23,7 +23,6 @@ export default () => {
         name="detailMovieScreen"
         component={DetailMovieScreen}
         initialParams={initialParams.detailMovieScreen}
-        options={{ headerShown: false }}
       />
     </>
   );

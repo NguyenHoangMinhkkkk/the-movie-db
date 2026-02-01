@@ -4,3 +4,6 @@ export { default as delay } from './delay';
 export { default as buildImageUrl } from './buildImageUrl';
 export { default as createLayoutAnimation } from './createLayoutAnimation';
 export { default as mergeArrayAndUniqueById } from './mergeArrayAndUniqueById';
+export { default as convertReleaseDateToCert } from './convertReleaseDateToCert';
+export { default as minutesToRuntime } from './minutesToRuntime';
+export { default as convertLanguageKey } from './convertLanguageKey';

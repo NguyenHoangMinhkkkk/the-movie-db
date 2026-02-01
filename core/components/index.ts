@@ -1,2 +1,1 @@
-// export { default as BottomToast } from './BottomToast';
-export {};
+export { default as CatchException } from './CatchException';

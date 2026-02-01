@@ -13,6 +13,10 @@ import {
   HouseIcon,
   BookmarkIcon,
   MagnifyingGlassIcon,
+  CaretLeftIcon,
+  DotIcon,
+  ArrowUpIcon,
+  CaretDownIcon,
 } from 'phosphor-react-native';
 import { ColorValue, StyleProp, ViewStyle } from 'react-native';
 
@@ -46,6 +50,10 @@ type IconConfigType =
   | 'BookmarkIcon'
   | 'MagnifyingGlassIcon'
   | 'CaretRightIcon'
+  | 'CaretLeftIcon'
+  | 'DotIcon'
+  | 'ArrowUpIcon'
+  | 'CaretDownIcon'
   | 'ImageIcon';
 
 const IconConfig: Record<IconConfigType, React.FC<IconProps>> = {
@@ -58,6 +66,10 @@ const IconConfig: Record<IconConfigType, React.FC<IconProps>> = {
   MagnifyingGlassIcon,
   CaretRightIcon,
   ImageIcon,
+  CaretLeftIcon,
+  DotIcon,
+  ArrowUpIcon,
+  CaretDownIcon,
 };
 
 function createSIcon() {
