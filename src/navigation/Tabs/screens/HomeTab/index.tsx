@@ -5,7 +5,13 @@ import { Spacing } from '@elements';
 import { requestApi } from '@api';
 import MovieCategory from './MovieCategory';
 import MovieSort from './MovieSort';
-import { CategoryEnum, MovieSortEnum, TMovie } from '@types';
+import {
+  ApiDataResponse,
+  CategoryEnum,
+  MovieSortEnum,
+  TDiscoverMovieResponse,
+  TMovie,
+} from '@types';
 import { useMovieContext } from '@contexts';
 import { metrics } from '@themes';
 import { MovieList } from '@components';
@@ -23,24 +29,43 @@ type States = {
   isReady: boolean;
   isFetching: boolean;
   isRefreshing: boolean;
-  searchText: string;
 };
 
 export default function HomeTab({ navigation }: Props) {
   const { sortKey, setSort, categoryKey, setCategory } = useMovieContext();
 
+  const searchTextRef = React.useRef<string>('');
+
   const [state, setState] = React.useState<States>({
     page: 1,
     totalPages: 1,
     movieList: [],
-    searchText: '',
     isError: false,
     isReady: false,
     isFetching: false,
     isRefreshing: false,
   });
 
-  const movieDBGetQueryString = async (
+  const requestSearchMovie = async (
+    isRefresh: boolean = false,
+    page: number = 1,
+  ) => {
+    setState(prevState => ({
+      ...prevState,
+      isFetching: !isRefresh,
+      isRefreshing: isRefresh,
+    }));
+
+    const response = await requestApi.requestSearchMovieList({
+      page: String(page),
+      language: DEFAULT.language,
+      query: encodeURIComponent(searchTextRef.current.trim()),
+    });
+
+    hanldingResponse(response, isRefresh, page);
+  };
+
+  const requestDiscoverMovieList = async (
     isRefresh: boolean = false,
     page: number = 1,
     params: {
@@ -61,11 +86,18 @@ export default function HomeTab({ navigation }: Props) {
       params.categoryKey ?? categoryKey,
       {
         page: String(page),
-        sort_by: params.sortKey ?? sortKey,
         language: DEFAULT.language,
       },
     );
 
+    hanldingResponse(response, isRefresh, page);
+  };
+
+  const hanldingResponse = (
+    response: ApiDataResponse<TDiscoverMovieResponse>,
+    isRefresh: boolean,
+    page: number,
+  ) => {
     if (response.ok && Array.isArray(response.data.results)) {
       setState(prevState => ({
         ...prevState,
@@ -98,15 +130,30 @@ export default function HomeTab({ navigation }: Props) {
   };
 
   React.useEffect(() => {
-    movieDBGetQueryString();
+    requestDiscoverMovieList();
   }, []);
 
   const debouncedSearch = debounce((text: string) => {
-    setState(prevState => ({
-      ...prevState,
-      searchText: text,
-    }));
+    searchTextRef.current = text.trim();
+    if (searchTextRef.current) requestSearchMovie(false, 1);
+    else requestDiscoverMovieList();
   }, 300);
+
+  const onLoadmore = () => {
+    if (searchTextRef.current) {
+      requestSearchMovie(false, state.page + 1);
+    } else {
+      requestDiscoverMovieList(false, state.page + 1);
+    }
+  };
+
+  const onRefresh = () => {
+    if (searchTextRef.current) {
+      requestSearchMovie(true);
+    } else {
+      requestDiscoverMovieList(true);
+    }
+  };
 
   return (
     <View style={styles.container}>
@@ -116,7 +163,7 @@ export default function HomeTab({ navigation }: Props) {
           selectedCategory={categoryKey}
           onSelectCategory={newCategory => {
             setCategory(newCategory);
-            movieDBGetQueryString(false, 1, { categoryKey: newCategory });
+            requestDiscoverMovieList(false, 1, { categoryKey: newCategory });
           }}
         />
 
@@ -125,20 +172,17 @@ export default function HomeTab({ navigation }: Props) {
           selectedSortKey={sortKey}
           onSelectSortKey={newSortKey => {
             setSort(newSortKey);
-            movieDBGetQueryString(false, 1, { sortKey: newSortKey });
+            requestDiscoverMovieList(false, 1, { sortKey: newSortKey });
           }}
         />
 
-        <SearchBox
-          searchText={state.searchText}
-          onSearchTextChange={text => debouncedSearch(text)}
-        />
+        <SearchBox onSearchTextChange={text => debouncedSearch(text)} />
       </View>
 
       <Spacing space={metrics.spacing.x4} />
 
       <MovieList
-        isSearching={!!state.searchText}
+        isSearching={!!searchTextRef.current}
         isError={state.isError}
         isReady={state.isReady}
         isFetching={state.isFetching}
@@ -148,8 +192,8 @@ export default function HomeTab({ navigation }: Props) {
         onPressItem={(movie: TMovie) => {
           navigation.navigate('detailMovieScreen', { movie: movie });
         }}
-        onRefresh={() => movieDBGetQueryString(true)}
-        onLoadmore={() => movieDBGetQueryString(false, state.page + 1)}
+        onRefresh={onRefresh}
+        onLoadmore={onLoadmore}
       />
     </View>
   );

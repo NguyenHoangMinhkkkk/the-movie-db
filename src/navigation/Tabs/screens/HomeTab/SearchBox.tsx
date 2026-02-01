@@ -4,12 +4,11 @@ import React from 'react';
 import { StyleSheet, View } from 'react-native';
 
 type Props = {
-  searchText: string;
   onSearchTextChange: (text: string) => void;
 };
 
 export default function SearchBox(props: Props) {
-  const [searchText, setSearchText] = React.useState<string>(props.searchText);
+  const [searchText, setSearchText] = React.useState<string>('');
 
   return (
     <View style={styles.container}>
