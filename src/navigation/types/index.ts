@@ -30,7 +30,6 @@ export type TInitialParams<T, P = {}> = Record<
   DefaultInitialParams & P
 >;
 
-// This is for adding default params to all screens
 type DefaultInitialParams = {
   statusBarStyle?: StatusBarStyle;
 };

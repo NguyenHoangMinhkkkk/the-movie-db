@@ -1,4 +1,4 @@
-import { ApiDataResponse } from '@types';
+import { ApiDataResponse, CategoryEnum, TDiscoverMovie, TMovie } from '@types';
 import { baseApi, BaseApi } from './baseApi';
 import routes from './routes';
 
@@ -9,12 +9,26 @@ const createTempApiInstance = (baseUrl: string) => {
 };
 
 const requestApi = {
-  api: baseApi.api,
+  apiInstance: baseApi.api,
   baseApi: baseApi,
-  routesUploadProfileAvatar: routes.uploadAvatar,
+  baseUrl: String(baseApi.api.defaults.baseURL || ''),
 
-  someRequest: (body: any): Promise<ApiDataResponse<{}, {}>> => {
-    return baseApi.api.patch(routes.languages, body);
+  requestDiscoverMovieList: (
+    type: CategoryEnum,
+    params: Record<string, any>,
+  ): Promise<ApiDataResponse<TDiscoverMovie>> => {
+    console.log('==========params-params=======', type, params);
+    return baseApi.api.get(routes.discoverMovieList(type), { params });
+  },
+  requestSearchMovieList: (
+    params: Record<string, any>,
+  ): Promise<ApiDataResponse<TDiscoverMovie>> => {
+    return baseApi.api.get(routes.searchMovieList(), { params });
+  },
+  requestGetMovieDetail: (
+    movieId: string,
+  ): Promise<ApiDataResponse<TMovie>> => {
+    return baseApi.api.get(routes.getMovieDetail(movieId));
   },
 };
 

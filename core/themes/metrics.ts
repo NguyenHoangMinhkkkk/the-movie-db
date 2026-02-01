@@ -13,6 +13,7 @@ const sizeSystem = (isSmallScreen: boolean, isLargeScreen: boolean) => {
     x5: baseSize * 5,
     x6: baseSize * 6,
     x8: baseSize * 8,
+    x10: baseSize * 10,
   };
 };
 

@@ -13,7 +13,7 @@ import {
 
 export default function (
   defaultTextColor: ColorValue = colors.black,
-  defaultPlaceholderTextColor: ColorValue = colors.gray.x5(),
+  defaultPlaceholderTextColor: ColorValue = colors.gray.x4(),
   fontFamily: Record<FontVariant, string> = fontFamilies,
   fontSize: Record<FontSize, number> = fontSizes,
 ) {

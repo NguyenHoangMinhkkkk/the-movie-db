@@ -8,7 +8,7 @@ export const SText = createTextElement(undefined, undefined, undefined);
 export const STouchable = createTouchableElement();
 export const STextInput = createTextInputElement(
   colors.black,
-  colors.gray.x5(),
+  colors.gray.x4(),
 );
 
 export { default as SIcon, type IconElementProps } from './SIcon';

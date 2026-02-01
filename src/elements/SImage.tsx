@@ -52,6 +52,8 @@ function SImage(props: Props) {
 
   return (
     <Image
+      resizeMode="contain"
+      resizeMethod="resize"
       {...props}
       style={[{ backgroundColor: colors.gray.x05() }, props.style]}
       onError={e => {

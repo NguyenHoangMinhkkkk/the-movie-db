@@ -32,7 +32,7 @@ export default function (
   function createSText(textStyleEnum: FontVariant) {
     type Props = {
       color?: ColorValue;
-      size?: FontSize;
+      size?: FontSize; // default 'md' -> size 16
       lineHeight?: LineHeightVariant;
       children?: React.ReactNode;
       pointerEvents?: any;

@@ -1,9 +1,10 @@
 import React from 'react';
 import { StyleSheet, View } from 'react-native';
 import { ScreenPropsType } from '@navigation/types';
+import { TMovie } from '@types';
 
 export type RouteType = {
-  movieId: string;
+  movie: TMovie;
 };
 
 type Props = ScreenPropsType<'detailMovieScreen'>;
