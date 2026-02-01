@@ -1,5 +1,7 @@
 # React Native Movie App – Technical Assessment
 
+> Screenshort provided
+   
 ## Overview
 
 This project was developed as part of a **technical competency assessment**.
@@ -11,6 +13,7 @@ Within approximately **20 hours**, the project was initialized and implemented s
 ## Project Setup
 
 * Initialized using **`react-native init`**
+* To run project, go to "./src/constant/index.ts", input the constants like BASE_URL, MEDIA_URL, ACCESS_TOKEN and accountId
 * React Native and all third-party libraries use the **latest stable or compatible versions**
 * Custom font integration (**SF Font**)
 * iOS configuration:
@@ -175,3 +178,4 @@ This project demonstrates:
 While some features remain incomplete due to limited time, the architecture is designed to be easily extended.
 
 Thank you for reviewing this submission.
+
