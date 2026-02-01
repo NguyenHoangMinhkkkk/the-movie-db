@@ -62,8 +62,6 @@ export default function DetailMovieScreen({ navigation, route }: Props) {
         responseReleaseDate?.data?.results ?? [],
       );
 
-      console.log('==========number-logName=======', responseCredit.data);
-
       setMovieState(prevState => ({
         ...prevState,
         movie: { ...prevState.movie, ...responseDetail.data },

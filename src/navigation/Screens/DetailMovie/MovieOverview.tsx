@@ -34,6 +34,53 @@ export default function MovieOverview({ movie, crews }: Props) {
       };
     }, [movie?.vote_average, movie?.tagline, movie?.overview, crews]);
 
+  const renderWatchlistButton = () => {
+    if (isInWatchlist) {
+      return (
+        <View style={styles.removeWatchlist}>
+          <SIcon.Icon
+            name="CheckIcon"
+            size={metrics.iconSize.x5}
+            weight="bold"
+          />
+          <SText.Semibold> Added to the watchlist!</SText.Semibold>
+          <Spacing space={metrics.spacing.x3} vertical />
+          <STouchable
+            onPress={() => {
+              watchListRemove(movie.id);
+            }}
+          >
+            <SText.Regular
+              size="sm"
+              style={basicStyles.textDecorationUnderLine}
+              lineHeight="more"
+            >
+              Remove from watchlist
+            </SText.Regular>
+          </STouchable>
+        </View>
+      );
+    }
+    return (
+      <STouchable
+        style={styles.addWatchlist}
+        onPress={() => {
+          watchListAdd(movie);
+        }}
+      >
+        <SIcon.Icon
+          name="BookmarkIcon"
+          weight="fill"
+          size={metrics.iconSize.x5}
+          color={isInWatchlist ? colors.yellow.x4() : colors.white}
+        />
+        <SText.Semibold color={colors.white}>
+          {'Add to Watchlist'}
+        </SText.Semibold>
+      </STouchable>
+    );
+  };
+
   return (
     <View style={styles.container}>
       <View style={basicStyles.row}>
@@ -94,26 +141,7 @@ export default function MovieOverview({ movie, crews }: Props) {
 
       <SText.Regular color={colors.white}>{overview}</SText.Regular>
 
-      <STouchable
-        style={styles.addWatchlist}
-        onPress={() => {
-          if (isInWatchlist) {
-            watchListRemove(movie.id);
-          } else {
-            watchListAdd(movie);
-          }
-        }}
-      >
-        <SIcon.Icon
-          name="BookmarkIcon"
-          weight="fill"
-          size={metrics.iconSize.x5}
-          color={isInWatchlist ? colors.yellow.x4() : colors.white}
-        />
-        <SText.Semibold color={colors.white}>
-          {'Add to Watchlist '}
-        </SText.Semibold>
-      </STouchable>
+      {renderWatchlistButton()}
     </View>
   );
 }
@@ -128,6 +156,12 @@ const styles = StyleSheet.create({
   crew: {
     gap: metrics.spacing.x4,
     flex: 1,
+  },
+  removeWatchlist: {
+    marginTop: metrics.spacing.x6,
+    flexDirection: 'row',
+    alignItems: 'center',
+    paddingVertical: metrics.spacing.x2,
   },
   addWatchlist: {
     marginTop: metrics.spacing.x6,

@@ -4,6 +4,7 @@ import React from 'react';
 import App from './App';
 import { CatchException } from '@components';
 
+// This screen for handling JS Crash
 class Index extends React.Component<any> {
   static getDerivedStateFromError() {
     return { hasError: true };
